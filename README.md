@@ -61,15 +61,16 @@ This is ideal for **genomic and medical data privacy**.
 
 ---
 
-## 📂 File Structure
+# Project Structure: FHE-Based Age Predictor
+
+```plaintext
 fhe_based_age_predictor/
-├── app.py # Gradio interface (FHE prediction)
-├── train_and_save_model.py # Training + model compilation
-├── requirements.txt # Dependencies
-├── dna_clock.R # R code for dnaMethyAge (Horvath, Dunedin, etc.)
-├── install.R # R package installation script
-├── requirements.txt
-│── train_and_save_model.py
+├── app.py                   # Gradio interface for encrypted age prediction
+├── train_and_save_model.py # Script for training the model and compiling it with Concrete ML
+├── dna_clock.R             # R script to extract biological age using Horvath/Dunedin clocks
+├── install.R               # R package installation script (dnaMethyAge, dependencies)
+├── requirements.txt        # Python dependencies (Concrete-ML, pandas, scikit-learn, gradio, rpy2, etc.)
+```
 
 
 ---
@@ -79,39 +80,6 @@ fhe_based_age_predictor/
 Paste 100 comma-separated CpG beta values into the input box.
 
 Output: Predicted Biological Age: 41.87 years
-
-
----
-
-## 🧪 Model Training Workflow
-
-### `train_and_save_model.py`
-
-```python
-from concrete.ml.sklearn import LinearRegression
-from sklearn.preprocessing import StandardScaler
-import joblib, os
-import numpy as np
-```
----
-
-# Simulate data
-X = np.random.rand(200, 100)
-y = np.random.randint(20, 70, 200)
-
-# Preprocess
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# Train and compile
-model = LinearRegression()
-model.fit(X_scaled, y)
-model.compile(X_scaled)
-
-# Save model and scaler
-os.makedirs("fhe_biological_age_model", exist_ok=True)
-model.save("fhe_biological_age_model/model_concrete")
-joblib.dump(scaler, "fhe_biological_age_model/scaler.joblib")
 
 ---
 
