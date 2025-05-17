@@ -1,0 +1,6 @@
+streamlit
+concrete-ml
+scikit-learn
+pandas
+numpy
+rpy2
