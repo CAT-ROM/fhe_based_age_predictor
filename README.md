@@ -62,4 +62,79 @@ This is ideal for **genomic and medical data privacy**.
 ---
 
 ## 📂 File Structure
+fhe_based_age_predictor/
+├── app.py # Gradio interface (FHE prediction)
+├── train_and_save_model.py # Training + model compilation
+├── requirements.txt # Dependencies
+├── dna_clock.R # R code for dnaMethyAge (Horvath, Dunedin, etc.)
+├── install.R # R package installation script
+├── requirements.txt
+│── train_and_save_model.py
+
+
+---
+
+## 📥 Input Format
+
+Paste 100 comma-separated CpG beta values into the input box.
+
+Output: Predicted Biological Age: 41.87 years
+
+
+---
+
+## 🧪 Model Training Workflow
+
+### `train_and_save_model.py`
+
+```python
+from concrete.ml.sklearn import LinearRegression
+from sklearn.preprocessing import StandardScaler
+import joblib, os
+import numpy as np
+
+# Simulate data
+X = np.random.rand(200, 100)
+y = np.random.randint(20, 70, 200)
+
+# Preprocess
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Train and compile
+model = LinearRegression()
+model.fit(X_scaled, y)
+model.compile(X_scaled)
+
+# Save model and scaler
+os.makedirs("fhe_biological_age_model", exist_ok=True)
+model.save("fhe_biological_age_model/model_concrete")
+joblib.dump(scaler, "fhe_biological_age_model/scaler.joblib")
+
+---
+
+## 👩‍💻 About Me
+
+I developed this project independently for the Zama AI Bounty Program as a way to explore privacy-preserving machine learning in the context of biomedical data.  
+I'm passionate about the intersection of **bioinformatics**, **artificial intelligence**, and **cryptographic techniques** like FHE.
+
+I enjoy building solutions that bridge science and privacy — especially in healthcare, genomics, and data ethics.
+
+---
+
+## 📬 Contact
+
+If you’re interested in this project, have feedback, or want to collaborate, feel free to connect!
+
+- 💻 [Live App on Hugging Face](https://huggingface.co/spaces/CAT-ROM/fhe-biological-age-predictor)
+- 📫 Reach out via GitHub or through comments on the [bounty issue](https://github.com/zama-ai/bounty-program/issues/143)
+
+Thanks for checking it out! 🧬🔐
+
+
+
+
+
+
+
 
