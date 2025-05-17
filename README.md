@@ -92,6 +92,8 @@ from concrete.ml.sklearn import LinearRegression
 from sklearn.preprocessing import StandardScaler
 import joblib, os
 import numpy as np
+```
+---
 
 # Simulate data
 X = np.random.rand(200, 100)
